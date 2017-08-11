@@ -8,24 +8,15 @@
 
 import Foundation
 
-protocol Entrant {
+protocol Enterable {
     var entrantType: EntrantType { get }
-    var rideAccess: [RideAccess] { get }
-    var areaAccess: [AreaAccess] { get }
 }
-
 
 /******************
 *GUEST DECLARATION*
 *******************/
-struct Guest: Entrant {
-    // protocol conformance
+struct Guest: Enterable {
     let entrantType: EntrantType = .guest
-    let rideAccess: [RideAccess]
-    let areaAccess: [AreaAccess]
-    let discounts: (Double, Double)?
-    //
-    
     let isVIP: Bool
     let guestType: GuestType
     let firstName: String?
@@ -36,10 +27,8 @@ struct Guest: Entrant {
     let zipcode: String?
     
     //Main init
-    init(rideAccess: [RideAccess], areaAccess: [AreaAccess], discounts: (Double, Double)?, isVIP: Bool, guestType: GuestType, firstName: String?, lastName: String?, DOB: Date?, streetAddress: String?, city: String?, zipcode: String?) {
-        self.rideAccess = rideAccess
-        self.areaAccess = areaAccess
-        self.discounts = discounts
+    init(isVIP: Bool, guestType: GuestType, firstName: String?, lastName: String?, DOB: Date?, streetAddress: String?, city: String?, zipcode: String?) {
+        
         self.isVIP = isVIP
         self.guestType = guestType
         self.firstName = firstName
@@ -52,11 +41,8 @@ struct Guest: Entrant {
     
     //Child init
     init(DOB: Date) {
-        self.rideAccess = [.allRides]
-        self.areaAccess = [.amusement]
         self.DOB = DOB
         self.guestType = .child
-        self.discounts = nil
         self.isVIP = false
         self.firstName = nil
         self.lastName = nil
@@ -67,14 +53,7 @@ struct Guest: Entrant {
     
     //Classic/VIP Guest init
     init(isVIP: Bool) {
-        if isVIP {
-            self.rideAccess = [.allRides, .skipLines]
-        } else {
-            self.rideAccess = [.allRides]
-        }
-        self.areaAccess = [.amusement]
         self.guestType = .classic
-        self.discounts = nil
         self.isVIP = isVIP
         self.firstName = nil
         self.lastName = nil
@@ -89,14 +68,8 @@ struct Guest: Entrant {
 /*********************
 *EMPLOYEE DECLARATION*
 *********************/
-struct Employee: Entrant {
-    // protocol conformance
+struct Employee: Enterable {
     let entrantType: EntrantType = .employee
-    let rideAccess: [RideAccess]
-    let areaAccess: [AreaAccess]
-    let discounts: (Double, Double)?
-    //
-    
     let employeeType: EmployeeType
     let firstName: String
     let lastName: String
@@ -105,29 +78,8 @@ struct Employee: Entrant {
     let city: String
     let zipcode: String
     
-    init(rideAccess: [RideAccess], areaAccess: [AreaAccess], discounts: (Double, Double)?, employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date?, streetAddress: String, city: String, zipcode: String) {
-        self.rideAccess = rideAccess
-        self.areaAccess = areaAccess
-        self.discounts = discounts
-        self.employeeType = employeeType
-        self.firstName = firstName
-        self.lastName = lastName
-        self.DOB = DOB
-        self.streetAddress = streetAddress
-        self.city = city
-        self.zipcode = zipcode
-    }
-    
-    //convenient init
     init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date?, streetAddress: String, city: String, zipcode: String) {
         self.employeeType = employeeType
-        self.rideAccess = [.allRides]
-        switch employeeType {
-        case .foodService: self.areaAccess = [.amusement, .kitchen]; self.discounts = (15, 25)
-        case .rideService: self.areaAccess = [.amusement, .rideControl]; self.discounts = (15, 25)
-        case .maintenance: self.areaAccess = [.amusement, .rideControl, .kitchen, .maintenance]; self.discounts = (15, 25)
-        case .manager: self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]; self.discounts = (25, 25)
-        }
         self.firstName = firstName
         self.lastName = lastName
         self.DOB = DOB
@@ -141,20 +93,16 @@ struct Employee: Entrant {
 /********************
  *ACCESS DECLARATION*
  ********************/
-enum AreaAccess {
+enum Access {
     case amusement
     case kitchen
     case rideControl
     case maintenance
     case office
-}
-
-enum RideAccess {
     case allRides
     case skipLines
+    case discount(Double, Double)
 }
-
-
 
 
 
