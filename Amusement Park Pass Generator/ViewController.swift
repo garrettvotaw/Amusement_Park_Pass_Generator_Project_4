@@ -20,6 +20,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    
+    
+    // create a pass button
+    func createPass(for entrant: Enterable, withName name: String) throws -> Pass {
+        if let pass = try Pass(enterant: entrant, name: name) {
+            return pass
+        } else {
+            throw ParkPassError.invalidEntrant
+        }
+    }
 }
-
