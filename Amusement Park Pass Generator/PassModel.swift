@@ -14,7 +14,7 @@ struct Pass {
     var discounts: Access?
     var name: String
     
-    init? (enterant: Enterable, name: String) throws {
+    init? (enterant: Enterable, name: String) {
         self.name = name
         // Check if the enterable person is a Guest
         if let enterant = enterant as? Guest {
@@ -64,8 +64,8 @@ struct Pass {
                 
             }
         }  else {
-            // Your entrant is neither a guest nor an employee.
-            throw ParkPassError.invalidEntrant
+            // Your entrant is neither a guest nor an employee so we aren't going to setup a pass.
+            return nil
         }
     }
 }

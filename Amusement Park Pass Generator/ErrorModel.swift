@@ -12,4 +12,5 @@ enum ParkPassError: Error {
     case invalidBirthday(Guest)
     case invalidName(Enterable)
     case invalidEntrant
+    case invalidAddress(Enterable)
 }

@@ -27,7 +27,7 @@ struct Guest: Enterable {
     let zipcode: String?
     
     //Main init
-    init(isVIP: Bool, guestType: GuestType, firstName: String?, lastName: String?, DOB: Date?, streetAddress: String?, city: String?, zipcode: String?) {
+    init(isVIP: Bool, guestType: GuestType, firstName: String?, lastName: String?, DOB: Date?, streetAddress: String?, city: String?, zipcode: String?) throws {
         
         self.isVIP = isVIP
         self.guestType = guestType
@@ -37,6 +37,10 @@ struct Guest: Enterable {
         self.streetAddress = streetAddress
         self.city = city
         self.zipcode = zipcode
+        
+        if guestType == .child && DOB == nil {
+            throw ParkPassError.invalidBirthday(self)
+        }
     }
     
     //Child init
@@ -53,7 +57,11 @@ struct Guest: Enterable {
     
     //Classic/VIP Guest init
     init(isVIP: Bool) {
-        self.guestType = .classic
+        if isVIP {
+            self.guestType = .vip
+        } else {
+            self.guestType = .classic
+        }
         self.isVIP = isVIP
         self.firstName = nil
         self.lastName = nil
@@ -78,7 +86,7 @@ struct Employee: Enterable {
     let city: String
     let zipcode: String
     
-    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date?, streetAddress: String, city: String, zipcode: String) {
+    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date?, streetAddress: String, city: String, zipcode: String) throws {
         self.employeeType = employeeType
         self.firstName = firstName
         self.lastName = lastName
@@ -86,6 +94,14 @@ struct Employee: Enterable {
         self.streetAddress = streetAddress
         self.city = city
         self.zipcode = zipcode
+        
+        if firstName == "" || lastName == "" {
+            throw ParkPassError.invalidName(self)
+        }
+        
+        if streetAddress == "" || city == "" || zipcode == "" {
+            throw ParkPassError.invalidAddress(self)
+        }
     }
 }
 
