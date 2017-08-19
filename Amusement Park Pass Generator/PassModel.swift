@@ -94,9 +94,9 @@ class Pass {
 
 extension Pass {
     func swipePass(for access: Access) -> Bool {
-        let totalAccess = self.areaAccess
-        for access in totalAccess {
-            if access.rawValue == access.rawValue {
+        let totalAccess = self.areaAccess + self.rideAccess
+        for anAccess in totalAccess {
+            if anAccess.rawValue == access.rawValue {
                 print("Access Granted for \(access.rawValue)")
                 return true
             }
