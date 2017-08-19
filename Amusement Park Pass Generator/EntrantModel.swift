@@ -39,7 +39,7 @@ struct Guest: Enterable {
         self.zipcode = zipcode
         
         if guestType == .child && DOB == nil {
-            throw ParkPassError.invalidBirthday(self)
+            throw ParkPassError.invalidBirthday
         }
     }
     
@@ -96,29 +96,17 @@ struct Employee: Enterable {
         self.zipcode = zipcode
         
         if firstName == "" || lastName == "" {
-            throw ParkPassError.invalidName(self)
+            throw ParkPassError.invalidName
         }
         
         if streetAddress == "" || city == "" || zipcode == "" {
-            throw ParkPassError.invalidAddress(self)
+            throw ParkPassError.invalidAddress
         }
     }
 }
 
 
-/********************
- *ACCESS DECLARATION*
- ********************/
-enum Access {
-    case amusement
-    case kitchen
-    case rideControl
-    case maintenance
-    case office
-    case allRides
-    case skipLines
-    case discount(Double, Double)
-}
+
 
 
 

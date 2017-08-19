@@ -18,6 +18,7 @@
 		68B95F871F3A06F90080D29B /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B95F861F3A06F90080D29B /* EntrantModel.swift */; };
 		68B95F891F3A11D70080D29B /* EntrantTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B95F881F3A11D70080D29B /* EntrantTypes.swift */; };
 		68BE3DFE1F3E4903009E59B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE3DFD1F3E4903009E59B5 /* ViewController.swift */; };
+		68C800AF1F43451F00D509F8 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C800AE1F43451F00D509F8 /* Pass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		68B95F861F3A06F90080D29B /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
 		68B95F881F3A11D70080D29B /* EntrantTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantTypes.swift; sourceTree = "<group>"; };
 		68BE3DFD1F3E4903009E59B5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68C800AE1F43451F00D509F8 /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				68BE3DFD1F3E4903009E59B5 /* ViewController.swift */,
 				6874CADA1F3A4359000E5F8C /* PassModel.swift */,
 				68B95F861F3A06F90080D29B /* EntrantModel.swift */,
+				68C800AE1F43451F00D509F8 /* Pass.swift */,
 				68B95F881F3A11D70080D29B /* EntrantTypes.swift */,
 				685CF7941F3E0639003E86C5 /* ErrorModel.swift */,
 				68B95F5C1F3A06650080D29B /* Main.storyboard */,
@@ -278,6 +281,7 @@
 				685CF7951F3E0639003E86C5 /* ErrorModel.swift in Sources */,
 				6874CADB1F3A4359000E5F8C /* PassModel.swift in Sources */,
 				68B95F871F3A06F90080D29B /* EntrantModel.swift in Sources */,
+				68C800AF1F43451F00D509F8 /* Pass.swift in Sources */,
 				68B95F591F3A06650080D29B /* AppDelegate.swift in Sources */,
 				68B95F891F3A11D70080D29B /* EntrantTypes.swift in Sources */,
 			);

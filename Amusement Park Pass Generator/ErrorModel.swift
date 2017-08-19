@@ -9,8 +9,8 @@
 import Foundation
 
 enum ParkPassError: Error {
-    case invalidBirthday(Guest)
-    case invalidName(Enterable)
+    case invalidBirthday
+    case invalidName
     case invalidEntrant
-    case invalidAddress(Enterable)
+    case invalidAddress
 }

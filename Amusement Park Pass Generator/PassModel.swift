@@ -8,33 +8,54 @@
 
 import Foundation
 
-struct Pass {
-    var rideAccess: [Access]?
-    var areaAccess: [Access]?
-    var discounts: Access?
+/********************
+ *ACCESS DECLARATION*
+ ********************/
+enum Access: String {
+    case amusement
+    case kitchen
+    case rideControl
+    case maintenance
+    case office
+    case allRides
+    case skipLines
+}
+
+
+
+/******************
+ *PASS DECLARATION*
+ ******************/
+
+class Pass {
+    var rideAccess: [Access]
+    var areaAccess: [Access]
+    var shoppingDiscounts: (Double, Double)?
     var name: String
+    var entrantType: EntrantType
     
-    init? (enterant: Enterable, name: String) {
+    init? (enterant: Enterable, name: String, entrantType: EntrantType) {
         self.name = name
+        self.entrantType = entrantType
         // Check if the enterable person is a Guest
         if let enterant = enterant as? Guest {
-            
+        
             switch enterant.guestType {
                 
             case .child:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement]
-            self.discounts = nil
+            self.shoppingDiscounts = nil
                 
             case .classic:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement]
-            self.discounts = nil
+            self.shoppingDiscounts = nil
                 
             case .vip:
             self.rideAccess = [.allRides, .skipLines]
             self.areaAccess = [.amusement]
-            self.discounts = .discount(0.1, 0.2)
+            self.shoppingDiscounts = (0.1, 0.2)
                 
             }
         // Check if they are an Employee
@@ -45,28 +66,84 @@ struct Pass {
             case .foodService:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .kitchen]
-            self.discounts = .discount(0.15, 0.25)
+            self.shoppingDiscounts = (0.15, 0.25)
                 
             case .maintenance:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .maintenance, .kitchen, .rideControl]
-            self.discounts = .discount(0.15, 0.25)
+            self.shoppingDiscounts = (0.15, 0.25)
                 
             case .manager:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]
-            self.discounts = .discount(0.25, 0.25)
+            self.shoppingDiscounts = (0.25, 0.25)
                 
             case .rideService:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .rideControl]
-            self.discounts = .discount(0.15, 0.25)
+            self.shoppingDiscounts = (0.15, 0.25)
                 
             }
         }  else {
             // Your entrant is neither a guest nor an employee so we aren't going to setup a pass.
             return nil
         }
+        
     }
 }
+
+extension Pass {
+    func swipePass(for access: Access) -> Bool {
+        let totalAccess = self.areaAccess
+        for access in totalAccess {
+            if access.rawValue == access.rawValue {
+                print("Access Granted for \(access.rawValue)")
+                return true
+            }
+        }
+        print("Access Denied for \(access)")
+        return false
+    }
+    
+    func swipePass(forDiscount discount: Double) -> Bool {
+        if shoppingDiscounts?.0 == discount || shoppingDiscounts?.1 == discount {
+            print("Discount Applied!")
+            return true
+        }
+        print("Access Denied")
+        return false
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
