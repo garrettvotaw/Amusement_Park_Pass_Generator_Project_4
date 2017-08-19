@@ -17,8 +17,10 @@ class ViewController: UIViewController {
 //        let child = Guest(DOB: Date())
 //        if let childPass = Pass(enterant: child, name: "Tommy", entrantType: .guest) {
 //            print (childPass.swipePass(for: .amusement))
-//            print (childPass.swipePass(for: .kitchen))   //Intentional failure case to test error handling
+//            print (childPass.swipePass(for: .kitchen))   //Intentional failure case to test Access Denial
 //        }
+        
+        
         
 //        //CLASSIC
 //        let classicGuest = Guest(isVIP: false)
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
 //            print (classicPass.swipePass(for: .amusement))
 //        }
         
+        
+        
 //        //VIP
 //        let vipGuest = Guest(isVIP: true)
 //        if let vipPass = Pass(enterant: vipGuest, name: "", entrantType: .guest) {
@@ -34,6 +38,8 @@ class ViewController: UIViewController {
 //            print (vipPass.swipePass(for: .skipLines))
 //            print (vipPass.swipePass(forDiscount: (vipPass.shoppingDiscounts?.0)!))
 //        }
+        
+        
         
 //        //FOOD SERVICE
 //        do {
@@ -49,6 +55,8 @@ class ViewController: UIViewController {
 //            print("\(error)")
 //        }
         
+        
+        
 //        //RIDE SERVICE
 //        do {
 //            let rideService = try Employee(employeeType: .rideService, firstName: "Muffin", lastName: "Man", DOB: nil, streetAddress: "326 Dreary Ln", city: "Muffin Land", zipcode: "42683")
@@ -62,6 +70,8 @@ class ViewController: UIViewController {
 //        } catch {
 //            print("\(error)")
 //        }
+        
+        
         
 //        //MAINTENANCE
 //        do {
@@ -77,6 +87,9 @@ class ViewController: UIViewController {
 //        } catch {
 //            print("\(error)")
 //        }
+        
+        
+        
         
 //        //MANAGER
 //        do {
