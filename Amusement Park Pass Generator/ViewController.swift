@@ -14,10 +14,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        //CHILD
-//        let child = Guest(DOB: Date())
-//        if let childPass = Pass(enterant: child, name: "Tommy", entrantType: .guest) {
-//            print (childPass.swipePass(for: .amusement))
-//            print (childPass.swipePass(for: .kitchen))   //Intentional failure case to test Access Denial
+//        do {
+//            let child = try Guest(DOB: Date())
+//            if let childPass = Pass(enterant: child, name: "Tommy", entrantType: .guest) {
+//                print (childPass.swipePass(for: .amusement))
+//                print (childPass.swipePass(for: .kitchen))   //Intentional failure case to test Access Denial
+//            }
+//        } catch ParkPassError.invalidBirthday {
+//            print("Please Provide a valid birthday")
+//        } catch {
+//            print("\(error)")
 //        }
         
         

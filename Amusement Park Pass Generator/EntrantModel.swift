@@ -44,7 +44,7 @@ struct Guest: Enterable {
     }
     
     //Child init
-    init(DOB: Date) {
+    init(DOB: Date?) throws {
         self.DOB = DOB
         self.guestType = .child
         self.isVIP = false
@@ -53,6 +53,10 @@ struct Guest: Enterable {
         self.streetAddress = nil
         self.city = nil
         self.zipcode = nil
+        
+        if DOB == nil {
+            throw ParkPassError.invalidBirthday
+        }
     }
     
     //Classic/VIP Guest init
