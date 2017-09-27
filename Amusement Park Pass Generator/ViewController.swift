@@ -10,9 +10,34 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var guestStackview: UIStackView!
+    @IBOutlet weak var employeeStackview: UIStackView!
+    @IBOutlet weak var managerStackView: UIStackView!
+    @IBOutlet weak var DOBtextField: UITextField!
+    @IBOutlet weak var ssnTextField: UITextField!
+    @IBOutlet weak var projectTextField: UITextField!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var streetAddressTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var stateTextField: UITextField!
+    @IBOutlet weak var zipTextField: UITextField!
+    
+    let clearColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DOBtextField.backgroundColor = clearColor
+        ssnTextField.backgroundColor = clearColor
+        projectTextField.backgroundColor = clearColor
+        firstNameTextField.backgroundColor = clearColor
+        lastNameTextField.backgroundColor = clearColor
+        companyTextField.backgroundColor = clearColor
+        streetAddressTextField.backgroundColor = clearColor
+        cityTextField.backgroundColor = clearColor
+        stateTextField.backgroundColor = clearColor
+        zipTextField.backgroundColor = clearColor
 //        //CHILD
 //        do {
 //            let child = try Guest(DOB: Date())
@@ -117,12 +142,33 @@ class ViewController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func guestButton(_ sender: Any) {
+        guestStackview.isHidden = false
+        employeeStackview.isHidden = true
+        managerStackView.isHidden = true
+        
+    }
+    @IBAction func employeeButton(_ sender: Any) {
+        employeeStackview.isHidden = false
+        guestStackview.isHidden = true
+        managerStackView.isHidden = true
+        firstNameTextField.backgroundColor = .white
+        lastNameTextField.backgroundColor = .white
+    }
+    @IBAction func managerButton(_ sender: Any) {
+        employeeStackview.isHidden = true
+        guestStackview.isHidden = true
+        managerStackView.isHidden = false
+    }
+    @IBAction func vendorButton(_ sender: Any) {
+        employeeStackview.isHidden = true
+        guestStackview.isHidden = true
+        managerStackView.isHidden = true
     }
     
-    // MARK: Test Cases
-    
+    @IBAction func createPass() {
+        
+    }
     
 }

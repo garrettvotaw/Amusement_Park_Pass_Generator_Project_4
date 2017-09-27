@@ -91,9 +91,10 @@ struct Employee: Enterable {
     let zipcode: String
     let ssn: String
     let managementTier: ManagementTier?
+    let projectNumber: String?
     
     
-    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date, streetAddress: String, city: String, zipcode: String, ssn: String, managementTier: ManagementTier?) throws {
+    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date, streetAddress: String, city: String, zipcode: String, ssn: String, managementTier: ManagementTier?, projectNumber: String?) throws {
         self.employeeType = employeeType
         self.firstName = firstName
         self.lastName = lastName
@@ -103,8 +104,11 @@ struct Employee: Enterable {
         self.zipcode = zipcode
         self.ssn = ssn
         self.managementTier = managementTier
+        self.projectNumber = projectNumber
         
-        
+        if employeeType == .contractor && projectNumber == "" {
+            throw ParkPassError.invalidProjectNumber
+        }
         if firstName == "" || lastName == "" {
             throw ParkPassError.invalidName
         }
@@ -128,16 +132,7 @@ struct Vendor {
     let company: Company
 }
 
-struct Contractor {
-    let enterantType = EntrantType.contractor
-    let firstName: String
-    let lastName: String
-    let DOB: Date
-    let streetAddress: String
-    let city: String
-    let zipcode: String
-    let ssn: String
-}
+
 
 
 

@@ -28,6 +28,7 @@ enum EmployeeType {
     case rideService
     case maintenance
     case manager
+    case contractor
 }
 
 enum ManagementTier {

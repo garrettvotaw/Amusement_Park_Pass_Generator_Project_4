@@ -14,4 +14,5 @@ enum ParkPassError: Error {
     case invalidEntrant
     case invalidAddress
     case invalidSocial
+    case invalidProjectNumber
 }

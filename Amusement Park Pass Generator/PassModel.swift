@@ -93,20 +93,50 @@ class Pass {
             self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]
             self.shoppingDiscounts = (0.25, 0.25)
                 
+            case .contractor:
+                switch enterant.projectNumber {
+                case "1001"?:
+                    self.areaAccess = [.amusement, .rideControl]
+                    self.rideAccess = [.allRides]
+                    self.shoppingDiscounts = nil
+                case "1002"?:
+                    self.areaAccess = [.amusement, .rideControl, .maintenance]
+                    self.rideAccess = [.allRides]
+                    self.shoppingDiscounts = nil
+                case "1003"?:
+                    self.areaAccess = [.amusement, .rideControl, .kitchen, .maintenance, .office]
+                    self.rideAccess = [.allRides]
+                    self.shoppingDiscounts = nil
+                case "2001"?:
+                    self.areaAccess = [.office]
+                    self.rideAccess = [.allRides]
+                    self.shoppingDiscounts = nil
+                case "2002"?:
+                    self.areaAccess = [.maintenance, .kitchen]
+                    self.rideAccess = [.allRides]
+                    self.shoppingDiscounts = nil
+                default: return nil
+                }
             }
         } else if let enterant = enterant as? Vendor {
             switch enterant.company {
             case .acme:
                 self.areaAccess = [.kitchen]
+                self.rideAccess = nil
+                self.shoppingDiscounts = nil
                 
             case .fedex:
                 self.areaAccess = [.maintenance, .office]
-                
+                self.rideAccess = nil
+                self.shoppingDiscounts = nil
             case .orkin:
                 self.areaAccess = [.amusement, .rideControl, .kitchen]
-                
+                self.rideAccess = nil
+                self.shoppingDiscounts = nil
             case .nwElectrical:
                 self.areaAccess = [.rideControl, .maintenance, .kitchen, .office, .amusement]
+                self.rideAccess = nil
+                self.shoppingDiscounts = nil
             }
         } else {
             return nil
