@@ -11,12 +11,16 @@ import Foundation
 enum EntrantType {
     case guest
     case employee
+    case vendor
+    case contractor
 }
 
 enum GuestType {
     case child
     case classic
     case vip
+    case seasonPass
+    case senior
 }
 
 enum EmployeeType {
@@ -25,3 +29,18 @@ enum EmployeeType {
     case maintenance
     case manager
 }
+
+enum ManagementTier {
+    case generalManager
+    case shiftManager
+    case seniorManager
+}
+
+enum Company {
+    case acme
+    case orkin
+    case fedex
+    case nwElectrical
+}
+
+

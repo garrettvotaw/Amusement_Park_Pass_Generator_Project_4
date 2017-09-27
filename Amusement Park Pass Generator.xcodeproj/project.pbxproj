@@ -18,7 +18,6 @@
 		68B95F871F3A06F90080D29B /* EntrantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B95F861F3A06F90080D29B /* EntrantModel.swift */; };
 		68B95F891F3A11D70080D29B /* EntrantTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B95F881F3A11D70080D29B /* EntrantTypes.swift */; };
 		68BE3DFE1F3E4903009E59B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE3DFD1F3E4903009E59B5 /* ViewController.swift */; };
-		68C800AF1F43451F00D509F8 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C800AE1F43451F00D509F8 /* Pass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +55,6 @@
 		68B95F861F3A06F90080D29B /* EntrantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantModel.swift; sourceTree = "<group>"; };
 		68B95F881F3A11D70080D29B /* EntrantTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantTypes.swift; sourceTree = "<group>"; };
 		68BE3DFD1F3E4903009E59B5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		68C800AE1F43451F00D509F8 /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +107,8 @@
 			children = (
 				68B95F581F3A06650080D29B /* AppDelegate.swift */,
 				68BE3DFD1F3E4903009E59B5 /* ViewController.swift */,
-				6874CADA1F3A4359000E5F8C /* PassModel.swift */,
 				68B95F861F3A06F90080D29B /* EntrantModel.swift */,
-				68C800AE1F43451F00D509F8 /* Pass.swift */,
+				6874CADA1F3A4359000E5F8C /* PassModel.swift */,
 				68B95F881F3A11D70080D29B /* EntrantTypes.swift */,
 				685CF7941F3E0639003E86C5 /* ErrorModel.swift */,
 				68B95F5C1F3A06650080D29B /* Main.storyboard */,
@@ -203,23 +200,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Garrett Votaw";
 				TargetAttributes = {
 					68B95F541F3A06650080D29B = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2J2B92S4Z7;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					68B95F681F3A06650080D29B = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2J2B92S4Z7;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 68B95F541F3A06650080D29B;
 					};
 					68B95F731F3A06650080D29B = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2J2B92S4Z7;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 68B95F541F3A06650080D29B;
 					};
@@ -281,7 +281,6 @@
 				685CF7951F3E0639003E86C5 /* ErrorModel.swift in Sources */,
 				6874CADB1F3A4359000E5F8C /* PassModel.swift in Sources */,
 				68B95F871F3A06F90080D29B /* EntrantModel.swift in Sources */,
-				68C800AF1F43451F00D509F8 /* Pass.swift in Sources */,
 				68B95F591F3A06650080D29B /* AppDelegate.swift in Sources */,
 				68B95F891F3A11D70080D29B /* EntrantTypes.swift in Sources */,
 			);
@@ -348,7 +347,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -356,7 +357,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -398,7 +403,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -406,7 +413,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -440,7 +451,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -454,7 +466,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -469,7 +482,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-GeneratorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amusement Park Pass Generator.app/Amusement Park Pass Generator";
 			};
 			name = Debug;
@@ -484,7 +498,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-GeneratorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amusement Park Pass Generator.app/Amusement Park Pass Generator";
 			};
 			name = Release;
@@ -498,7 +513,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-GeneratorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "Amusement Park Pass Generator";
 			};
 			name = Debug;
@@ -512,7 +528,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.votaw.Amusement-Park-Pass-GeneratorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "Amusement Park Pass Generator";
 			};
 			name = Release;

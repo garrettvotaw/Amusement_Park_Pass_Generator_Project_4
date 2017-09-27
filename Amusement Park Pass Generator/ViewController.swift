@@ -96,10 +96,9 @@ class ViewController: UIViewController {
         
         
         
-        
-//        //MANAGER
+                //MANAGER
 //        do {
-//            let manager = try Employee(employeeType: .manager, firstName: "Tom", lastName: "Pickles", DOB: nil, streetAddress: "", city: "", zipcode: "")
+//            let manager = try Employee(employeeType: .manager, firstName: "Tom", lastName: "Pickles", DOB: Date(), streetAddress: "1", city: "1", zipcode: "1", ssn: "1", managementTier: .generalManager)
 //            if let managerPass = Pass(enterant: manager, name: manager.firstName, entrantType: .employee) {
 //                print(managerPass.swipePass(for: .allRides))
 //                print(managerPass.swipePass(for: .office))
@@ -109,6 +108,8 @@ class ViewController: UIViewController {
 //            print("Address Is Invalid")
 //        } catch ParkPassError.invalidName {
 //            print("Please Enter a valid name for both First and Last name")
+//        } catch ParkPassError.invalidSocial {
+//            print("Please Enter a valid Social")
 //        } catch {
 //            print("\(error)")
 //        }

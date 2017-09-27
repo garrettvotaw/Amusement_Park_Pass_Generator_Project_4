@@ -28,7 +28,7 @@ enum Access: String {
  ******************/
 
 class Pass {
-    var rideAccess: [Access]
+    var rideAccess: [Access]?
     var areaAccess: [Access]
     var shoppingDiscounts: (Double, Double)?
     var name: String
@@ -57,12 +57,22 @@ class Pass {
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = (0.1, 0.2)
                 
+            case .seasonPass:
+            self.rideAccess = [.allRides, .skipLines]
+            self.areaAccess = [.amusement]
+            self.shoppingDiscounts = (0.1, 0.2)
+                
+            case .senior:
+            self.rideAccess = [.allRides, .skipLines]
+            self.areaAccess = [.amusement]
+            self.shoppingDiscounts = (0.1, 0.2)
+                
             }
         // Check if they are an Employee
         } else if let enterant = enterant as? Employee {
 
             switch enterant.employeeType {
-                
+
             case .foodService:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .kitchen]
@@ -73,30 +83,42 @@ class Pass {
             self.areaAccess = [.amusement, .maintenance, .kitchen, .rideControl]
             self.shoppingDiscounts = (0.15, 0.25)
                 
-            case .manager:
-            self.rideAccess = [.allRides]
-            self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]
-            self.shoppingDiscounts = (0.25, 0.25)
-                
             case .rideService:
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .rideControl]
             self.shoppingDiscounts = (0.15, 0.25)
                 
+            case .manager:
+            self.rideAccess = [.allRides]
+            self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]
+            self.shoppingDiscounts = (0.25, 0.25)
+                
             }
-        }  else {
-            // Your entrant is neither a guest nor an employee so we aren't going to setup a pass.
+        } else if let enterant = enterant as? Vendor {
+            switch enterant.company {
+            case .acme:
+                self.areaAccess = [.kitchen]
+                
+            case .fedex:
+                self.areaAccess = [.maintenance, .office]
+                
+            case .orkin:
+                self.areaAccess = [.amusement, .rideControl, .kitchen]
+                
+            case .nwElectrical:
+                self.areaAccess = [.rideControl, .maintenance, .kitchen, .office, .amusement]
+            }
+        } else {
             return nil
         }
-        
     }
 }
 
 extension Pass {
     func swipePass(for access: Access) -> Bool {
-        let totalAccess = self.areaAccess + self.rideAccess
+        let totalAccess = self.areaAccess + self.rideAccess!
         for anAccess in totalAccess {
-            if anAccess.rawValue == access.rawValue {
+            if anAccess == access {
                 print("Access Granted for \(access.rawValue)")
                 return true
             }

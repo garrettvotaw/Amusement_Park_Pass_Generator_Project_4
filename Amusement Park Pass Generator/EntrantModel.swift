@@ -85,12 +85,15 @@ struct Employee: Enterable {
     let employeeType: EmployeeType
     let firstName: String
     let lastName: String
-    let DOB: Date?
+    let DOB: Date
     let streetAddress: String
     let city: String
     let zipcode: String
+    let ssn: String
+    let managementTier: ManagementTier?
     
-    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date?, streetAddress: String, city: String, zipcode: String) throws {
+    
+    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date, streetAddress: String, city: String, zipcode: String, ssn: String, managementTier: ManagementTier?) throws {
         self.employeeType = employeeType
         self.firstName = firstName
         self.lastName = lastName
@@ -98,6 +101,9 @@ struct Employee: Enterable {
         self.streetAddress = streetAddress
         self.city = city
         self.zipcode = zipcode
+        self.ssn = ssn
+        self.managementTier = managementTier
+        
         
         if firstName == "" || lastName == "" {
             throw ParkPassError.invalidName
@@ -106,9 +112,32 @@ struct Employee: Enterable {
         if streetAddress == "" || city == "" || zipcode == "" {
             throw ParkPassError.invalidAddress
         }
+        
+        if ssn == "" {
+            throw ParkPassError.invalidSocial
+        }
     }
 }
 
+struct Vendor {
+    let enterantType = EntrantType.vendor
+    let firstName: String
+    let lastName: String
+    let DOB: Date
+    let dateOfVisit: Date
+    let company: Company
+}
+
+struct Contractor {
+    let enterantType = EntrantType.contractor
+    let firstName: String
+    let lastName: String
+    let DOB: Date
+    let streetAddress: String
+    let city: String
+    let zipcode: String
+    let ssn: String
+}
 
 
 
