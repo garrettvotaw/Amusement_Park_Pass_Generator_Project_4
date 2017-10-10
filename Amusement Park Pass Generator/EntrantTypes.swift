@@ -37,11 +37,11 @@ enum ManagementTier {
     case seniorManager
 }
 
-enum Company {
-    case acme
-    case orkin
-    case fedex
-    case nwElectrical
+enum Company: String {
+    case acme = "ACME"
+    case orkin = "Orkin"
+    case fedex = "FedEx"
+    case nwElectrical = "Northwest Electrical"
 }
 
 

@@ -123,8 +123,8 @@ struct Employee: Enterable {
     }
 }
 
-struct Vendor {
-    let enterantType = EntrantType.vendor
+struct Vendor: Enterable {
+    let entrantType: EntrantType = .vendor
     let firstName: String
     let lastName: String
     let DOB: Date

@@ -12,13 +12,13 @@ import Foundation
  *ACCESS DECLARATION*
  ********************/
 enum Access: String {
-    case amusement
-    case kitchen
-    case rideControl
-    case maintenance
-    case office
-    case allRides
-    case skipLines
+    case amusement = "Amusement"
+    case kitchen = "Kitchen"
+    case rideControl = "Ride Control"
+    case maintenance = "Maintenance"
+    case office = "Office"
+    case allRides = "All Rides"
+    case skipLines = "Skip Lines"
 }
 
 
@@ -28,6 +28,7 @@ enum Access: String {
  ******************/
 
 class Pass {
+    var passType: String
     var rideAccess: [Access]?
     var areaAccess: [Access]
     var shoppingDiscounts: (Double, Double)?
@@ -43,26 +44,31 @@ class Pass {
             switch enterant.guestType {
                 
             case .child:
+            self.passType = "Child Pass"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = nil
                 
             case .classic:
+            self.passType = "Adult Pass"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = nil
                 
             case .vip:
+            self.passType = "VIP"
             self.rideAccess = [.allRides, .skipLines]
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = (0.1, 0.2)
                 
             case .seasonPass:
+            self.passType = "Season Pass"
             self.rideAccess = [.allRides, .skipLines]
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = (0.1, 0.2)
                 
             case .senior:
+            self.passType = "Senior Pass"
             self.rideAccess = [.allRides, .skipLines]
             self.areaAccess = [.amusement]
             self.shoppingDiscounts = (0.1, 0.2)
@@ -74,26 +80,31 @@ class Pass {
             switch enterant.employeeType {
 
             case .foodService:
+            self.passType = "Food Service"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .kitchen]
             self.shoppingDiscounts = (0.15, 0.25)
                 
             case .maintenance:
+            self.passType = "Maintenance"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .maintenance, .kitchen, .rideControl]
             self.shoppingDiscounts = (0.15, 0.25)
                 
             case .rideService:
+            self.passType = "Ride Service"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .rideControl]
             self.shoppingDiscounts = (0.15, 0.25)
                 
             case .manager:
+            self.passType = "Manager"
             self.rideAccess = [.allRides]
             self.areaAccess = [.amusement, .kitchen, .maintenance, .office, .rideControl]
             self.shoppingDiscounts = (0.25, 0.25)
                 
             case .contractor:
+                self.passType = "Contractor"
                 switch enterant.projectNumber {
                 case "1001"?:
                     self.areaAccess = [.amusement, .rideControl]
@@ -119,6 +130,7 @@ class Pass {
                 }
             }
         } else if let enterant = enterant as? Vendor {
+            self.passType = "Vendor"
             switch enterant.company {
             case .acme:
                 self.areaAccess = [.kitchen]
@@ -146,23 +158,25 @@ class Pass {
 
 extension Pass {
     func swipePass(for access: Access) -> Bool {
-        let totalAccess = self.areaAccess + self.rideAccess!
+        var totalAccess: [Access] = []
+        if let rideAccess = self.rideAccess {
+            totalAccess = self.areaAccess + rideAccess
+        } else {
+            totalAccess = self.areaAccess
+        }
+        
         for anAccess in totalAccess {
             if anAccess == access {
-                print("Access Granted for \(access.rawValue)")
                 return true
             }
         }
-        print("Access Denied for \(access)")
         return false
     }
     
     func swipePass(forDiscount discount: Double) -> Bool {
         if shoppingDiscounts?.0 == discount || shoppingDiscounts?.1 == discount {
-            print("Discount Applied!")
             return true
         }
-        print("Access Denied")
         return false
     }
 }
