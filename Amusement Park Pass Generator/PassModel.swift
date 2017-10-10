@@ -35,7 +35,7 @@ class Pass {
     var name: String
     var entrantType: EntrantType
     
-    init? (enterant: Enterable, name: String, entrantType: EntrantType) {
+    init? (enterant: Enterable, name: String, entrantType: EntrantType) throws {
         self.name = name
         self.entrantType = entrantType
         // Check if the enterable person is a Guest
@@ -71,7 +71,7 @@ class Pass {
             self.passType = "Senior Pass"
             self.rideAccess = [.allRides, .skipLines]
             self.areaAccess = [.amusement]
-            self.shoppingDiscounts = (0.1, 0.2)
+            self.shoppingDiscounts = (0.1, 0.1)
                 
             }
         // Check if they are an Employee
@@ -126,7 +126,7 @@ class Pass {
                     self.areaAccess = [.maintenance, .kitchen]
                     self.rideAccess = [.allRides]
                     self.shoppingDiscounts = nil
-                default: return nil
+                default: throw ParkPassError.invalidProjectNumber
                 }
             }
         } else if let enterant = enterant as? Vendor {

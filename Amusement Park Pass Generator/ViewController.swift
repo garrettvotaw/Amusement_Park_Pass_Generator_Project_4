@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var projectTextField: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var companyTextField: UITextField!
     @IBOutlet weak var streetAddressTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var stateTextField: UITextField!
@@ -34,7 +33,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        arrayOfTextFields.append(contentsOf: [DOBtextField, ssnTextField, projectTextField, firstNameTextField, lastNameTextField, companyTextField, stateTextField, streetAddressTextField, cityTextField, zipTextField])
+        arrayOfTextFields.append(contentsOf: [DOBtextField, ssnTextField, projectTextField, firstNameTextField, lastNameTextField, stateTextField, streetAddressTextField, cityTextField, zipTextField])
         resetDisplay()
     }
 
@@ -137,8 +136,6 @@ class ViewController: UIViewController {
         lastNameTextField.backgroundColor = .white
         DOBtextField.isEnabled = true
         DOBtextField.backgroundColor = .white
-        companyTextField.isEnabled = true
-        companyTextField.backgroundColor = .white
         switch sender.tag {
         case 0: selectedCompany = Company.acme
         case 1: selectedCompany = Company.orkin
@@ -158,130 +155,144 @@ class ViewController: UIViewController {
             if selectedButton == .child {
                 do {
                     let guest = try Guest(DOB: birthday!)
-                    ConnectionHandler.pass = Pass(enterant: guest, name: "Child Pass", entrantType: .guest)
+                    ConnectionHandler.pass = try Pass(enterant: guest, name: "Child Pass", entrantType: .guest)
                     presentNextView()
                 } catch ParkPassError.invalidBirthday {
-                    print("Please Provide a valid birthday")
+                    showAlert(withTitle: "Invalid Birthday", message: "Guest must be 5yrs Old or younger to obtain this pass")
                 } catch {
                     print(error)
                 }
             } else if selectedButton == .adult {
                 let guest = Guest(isVIP: false)
-                ConnectionHandler.pass = Pass(enterant: guest, name: firstNameTextField.text!, entrantType: .guest)
+                ConnectionHandler.pass = try Pass(enterant: guest, name: firstNameTextField.text!, entrantType: .guest)
                 presentNextView()
             } else if selectedButton == .senior {
                 do {
                     let guest = try Guest(isVIP: false, guestType: .senior, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday, streetAddress: nil, city: nil, zipcode: nil)
-                    ConnectionHandler.pass = Pass(enterant: guest, name: guest.firstName! + " " + guest.lastName!, entrantType: .guest)
+                    ConnectionHandler.pass = try Pass(enterant: guest, name: guest.firstName! + " " + guest.lastName!, entrantType: .guest)
                     presentNextView()
                 } catch {
                     print(error)
                 }
             } else if selectedButton == .vip {
                 let guest = Guest(isVIP: true)
-                ConnectionHandler.pass = Pass(enterant: guest, name: "VIP Pass", entrantType: .guest)
+                ConnectionHandler.pass = try Pass(enterant: guest, name: "VIP Pass", entrantType: .guest)
                 presentNextView()
             } else if selectedButton == .seasonPass {
                 do {
                     let guest = try Guest(isVIP: false, guestType: .seasonPass, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!)
-                    ConnectionHandler.pass = Pass(enterant: guest, name: guest.firstName! + " " + guest.lastName!, entrantType: .guest)
+                    ConnectionHandler.pass = try Pass(enterant: guest, name: guest.firstName! + " " + guest.lastName!, entrantType: .guest)
                     presentNextView()
                 } catch {
                     print(error)
                 }
             } else if selectedButton == .foodEmployee {
                 do {
-                    let employee = try Employee(employeeType: .foodService, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil , projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: firstNameTextField.text! + " " + lastNameTextField.text!, entrantType: .employee)
+                    let employee = try Employee(employeeType: .foodService, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil , projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: firstNameTextField.text! + " " + lastNameTextField.text!, entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == .rideEmployee {
                 do {
-                    let employee = try Employee(employeeType: .rideService, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .rideService, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == .maintenanceEmployee {
                 do {
-                    let employee = try Employee(employeeType: .maintenance, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .maintenance, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == Button.contractorEmployee {
                 do {
-                    let employee = try Employee(employeeType: .contractor, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .contractor, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: nil, projectNumber: projectTextField.text!)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidProjectNumber {
+                    showAlert(withTitle: "Invalid Project Number", message: "That is not a valid Project number.")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == Button.shiftManager {
                 do {
-                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .shiftManager, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .shiftManager, projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == Button.generalManager {
                 do {
-                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .generalManager, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .generalManager, projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
+                } catch ParkPassError.invalidSocial {
+                    showAlert(withTitle: "Invalid Social", message: "Please Enter a valid Social Security Number")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == Button.seniorManager {
                 do {
-                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .seniorManager, projectNumber: nil)
-                    ConnectionHandler.pass = Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
+                    let employee = try Employee(employeeType: .manager, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, streetAddress: streetAddressTextField.text!, city: cityTextField.text!, state: stateTextField.text!, zipcode: zipTextField.text!, ssn: ssnTextField.text!, managementTier: .seniorManager, projectNumber: nil)
+                    ConnectionHandler.pass = try Pass(enterant: employee, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .employee)
                     presentNextView()
                 } catch ParkPassError.invalidAddress {
-                    print("Address Is Invalid")
+                    showAlert(withTitle: "Invalid Address", message: "Please ensure all address fields are filled in before proceeding")
                 } catch ParkPassError.invalidName {
-                    print("Please Enter a valid name for both First and Last name")
+                    showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
                 } catch {
                     print("\(error)")
                 }
             } else if selectedButton == Button.vendor {
                 let vendor = Vendor(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, DOB: birthday!, dateOfVisit: Date(), company: selectedCompany!)
-                ConnectionHandler.pass = Pass(enterant: vendor, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .vendor)
+                ConnectionHandler.pass = try Pass(enterant: vendor, name: "\(firstNameTextField.text!) \(lastNameTextField.text!)", entrantType: .vendor)
                 presentNextView()
             }
         } catch ParkPassError.invalidBirthday {
-            print("Please enter a valid Birthday")
+            showAlert(withTitle: "Invalid Birthday", message: "Please follow the correct format for the Date of Birth field")
         } catch ParkPassError.invalidName {
-            print("Please Enter a valid name for both First and Last name")
+            showAlert(withTitle: "Invalid Name", message: "Please Enter a valid name for both First and Last name")
         } catch {
             print(error)
         }
@@ -325,9 +336,6 @@ class ViewController: UIViewController {
         lastNameTextField.isEnabled = false
         lastNameTextField.backgroundColor = clearColor
         lastNameTextField.text = ""
-        companyTextField.isEnabled = false
-        companyTextField.backgroundColor = clearColor
-        companyTextField.text = ""
         streetAddressTextField.isEnabled = false
         streetAddressTextField.backgroundColor = clearColor
         streetAddressTextField.text = ""
@@ -379,6 +387,13 @@ class ViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextView = storyboard.instantiateViewController(withIdentifier: "secondView")
         present(nextView, animated: true, completion: nil)
+    }
+    
+    func showAlert(withTitle title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 

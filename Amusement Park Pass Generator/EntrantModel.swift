@@ -25,6 +25,9 @@ struct Guest: Enterable {
     let streetAddress: String?
     let city: String?
     let zipcode: String?
+    var fiveYrsPrior: Date? {
+        return Calendar.current.date(byAdding: .year, value: -5, to: Date())
+    }
     
     //Main init
     init(isVIP: Bool, guestType: GuestType, firstName: String?, lastName: String?, DOB: Date?, streetAddress: String?, city: String?, zipcode: String?) throws {
@@ -44,7 +47,7 @@ struct Guest: Enterable {
     }
     
     //Child init
-    init(DOB: Date?) throws {
+    init(DOB: Date) throws {
         self.DOB = DOB
         self.guestType = .child
         self.isVIP = false
@@ -54,7 +57,7 @@ struct Guest: Enterable {
         self.city = nil
         self.zipcode = nil
         
-        if DOB == nil {
+        if DOB < fiveYrsPrior! {
             throw ParkPassError.invalidBirthday
         }
     }
@@ -88,19 +91,21 @@ struct Employee: Enterable {
     let DOB: Date
     let streetAddress: String
     let city: String
+    let state: String
     let zipcode: String
     let ssn: String
     let managementTier: ManagementTier?
     let projectNumber: String?
     
     
-    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date, streetAddress: String, city: String, zipcode: String, ssn: String, managementTier: ManagementTier?, projectNumber: String?) throws {
+    init(employeeType: EmployeeType, firstName: String, lastName: String, DOB: Date, streetAddress: String, city: String, state: String, zipcode: String, ssn: String, managementTier: ManagementTier?, projectNumber: String?) throws {
         self.employeeType = employeeType
         self.firstName = firstName
         self.lastName = lastName
         self.DOB = DOB
         self.streetAddress = streetAddress
         self.city = city
+        self.state = state
         self.zipcode = zipcode
         self.ssn = ssn
         self.managementTier = managementTier
@@ -113,7 +118,7 @@ struct Employee: Enterable {
             throw ParkPassError.invalidName
         }
         
-        if streetAddress == "" || city == "" || zipcode == "" {
+        if streetAddress == "" || city == "" || zipcode == "" || state == "" {
             throw ParkPassError.invalidAddress
         }
         
